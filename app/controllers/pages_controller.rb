@@ -14,6 +14,7 @@ class PagesController < ApplicationController
         render json: data, status: :created
     end 
 
+
     def userAll 
         render json: User.all
     end
@@ -26,47 +27,30 @@ class PagesController < ApplicationController
     end
 
 
-    def home 
-        render html: 'Hello World'
-    end
-
-    def office 
-        render html: "Hey i'm in office"
-    end
-
-    # skip_before_action :verify_authenticity_token
-    # def about 
-    #     render json: Task.all
-    # end
-
-    def task
-        render json: Task.find(params[:id])
-    end
-
-    def delete
-        task=Task.find(params[:id])
-        task.destroy()
-        render html: 'done'
-    end
     
-    def create_table
-        test1=Task.create(params.permit(:title, :status, :archive))
-        test1.save()
-        render json: test1, status: :created
+
+    def createUserExpense
+        data = User.new(params.permit(:date , :paymentType ,:description, :amount))
+        puts data
+        data.save()
+        render json: data, status: :created
+    end 
+
+    def date
+        render html: date
+        
+    end
+    # skip_before_action :verify_authenticity_token
+    def paymenttype
+        # render html: 'hello world'
+        render json: paymenttype
     end
 
-    def number 
-        render html: "Phone Number"
+    def amount
+        render html: amount
+    end
+    def description
+        render html: description
     end
 
-    def showAll 
-        render json: User.all()
-
-    end
-
-    def Letshow
-        task10 = Task.find_by(title: params[:title])
-        # task10.headers.add('Access-Control-Allow-Origin','*')
-        render json: task10 
-    end
 end

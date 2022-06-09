@@ -3,16 +3,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "articles#index"
-  # root "pages#office"
-  # # get '/about', to: 'pages#about'
-  # # get '/number', to: 'pages#number'
-  # # post '/about', to: 'pages#about'
-  # # get '/task/:id',to: 'pages#task'
-  # delete '/task/:id', to: 'pages#delete'
-  # # post 'task' , to: 'pages#create'
-  get '/showAll' , to: 'pages#showAll'
-  # post '/test' , to: 'pages#create_table'
-  # get '/show/:title' , to: 'pages#Letshow'
 
   get '/user/:userId' , to: 'pages#checkId'
   get '/user/:password' , to: 'pages#checkPassword'
@@ -20,5 +10,11 @@ Rails.application.routes.draw do
   post 'userCreate' , to: 'pages#createNewUser'
   get 'userShowAll' , to: 'pages#userAll'
   delete 'userDelete/:userId' , to: 'pages#userDelete'
+
+  post 'userCreateData' , to: 'pages#createUserExpense'
+  get '/date', to: 'pages#date'
+  get '/paymenttype', to: 'pages#paymenttype'
+  get '/amount', to: 'pages#amount'
+  get 'description', to: 'pages#description'
 
 end

@@ -10,25 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_09_124243) do
-  create_table "movies", force: :cascade do |t|
-    t.string "name"
-    t.string "imdbID"
-    t.integer "released"
-    t.float "imdbRating"
-    t.string "genre"
-    t.string "director"
-    t.string "actors"
-    t.string "writer"
-    t.string "language"
-  end
-
-  create_table "tasks", force: :cascade do |t|
-    t.string "title"
-    t.string "status"
-    t.string "archive"
-    t.datetime "created_at", precision: nil
-    t.datetime "updated_at", precision: nil
+ActiveRecord::Schema[7.0].define(version: 2022_06_09_145659) do
+  create_table "expenses", force: :cascade do |t|
+    t.date "date"
+    t.string "paymentType"
+    t.string "description"
+    t.integer "amount"
   end
 
   create_table "users", force: :cascade do |t|
