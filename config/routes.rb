@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   get 'userShowAll' , to: 'pages#userAll'
   delete 'userDelete/:userId' , to: 'pages#userDelete'
 
-  post 'userCreateData' , to: 'pages#createUserExpense'
+  post 'userCreateExpense/:userId' , to: 'pages#createUserExpense'
+  get 'expenseAll/:userId' , to:'pages#ExpenseAll'
   get '/date', to: 'pages#date'
   get '/paymenttype', to: 'pages#paymenttype'
   get '/amount', to: 'pages#amount'

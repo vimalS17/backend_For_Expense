@@ -30,11 +30,19 @@ class PagesController < ApplicationController
     
 
     def createUserExpense
-        data = User.new(params.permit(:date , :paymentType ,:description, :amount))
-        puts data
-        data.save()
-        render json: data, status: :created
+        theUser = User.find_by(params[:userId])
+        Expense.create(date:params[:date], paymentType:params[:paymentType], description:params[:description], amount:params[amount],user:theUser)
+
+        # data = User.new(params.permit(:date , :paymentType ,:description, :amount))
+        # puts data
+        # data.save()
+        render json:status: :created
     end 
+
+    def ExpenseAll 
+        theUser = User.find_by(params[:userId])
+        render json: Expense.find_by(params[:theUser])
+    end
 
     def date
         render html: date
