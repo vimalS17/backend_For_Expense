@@ -8,7 +8,7 @@ class PagesController < ApplicationController
 
     skip_before_action :verify_authenticity_token
     def createNewUser
-        data = User.new(params.permit(:userId , :password))
+        data = User.new(params.permit(:username , :password))
         puts data
         data.save()
         render json: data, status: :created
@@ -29,25 +29,38 @@ class PagesController < ApplicationController
 
     
 
-    def createUserExpense
-        theUser = User.find_by(params[:userId])
-        Expense.create(date:params[:date], paymentType:params[:paymentType], description:params[:description], amount:params[amount],user:theUser)
-
-        # data = User.new(params.permit(:date , :paymentType ,:description, :amount))
-        # puts data
-        # data.save()
-        render json:status: :created
+    def createExpense
+        theUser = User.find(params[:id])
+        # Price.create(date:params[:date], paymentType:params[:paymentType], description:params[:description], amount:params[:amount],user:theUser)
+        data = Price.new(date:params[:date], paymentType:params[:paymentType], description:params[:description], amount:params[:amount],user:theUser)
+        puts data
+        data.save()
+        render json: data
     end 
 
-    def ExpenseAll 
-        theUser = User.find_by(params[:userId])
-        render json: Expense.find_by(params[:theUser])
+    def expenseShowAll
+        # render html: "hello"
+        theUser = User.find(params[:user_id])
+        puts params
+        thePrice = Price.where(date: params[:date],user_id: params[:user_id])
+        render json: thePrice
     end
 
-    def date
-        render html: date
-        
+    def priceDelete
+        theUser=User.find(params[:userId])
+        theUser.destroy()
+        render html: 'done'
     end
+    # def expenses 
+    #     theUser = User.find(params[:id])
+    #     theDate = Price.find_by((user_id: params[:user_id]) && (date: params[:date]))
+    #     render json: theDate
+    # end
+
+    # def date
+    #     render html: "date"
+        
+    # end
     # skip_before_action :verify_authenticity_token
     def paymenttype
         # render html: 'hello world'
@@ -55,10 +68,11 @@ class PagesController < ApplicationController
     end
 
     def amount
-        render html: amount
+        render html: "amount"
     end
     def description
-        render html: description
+        render html: "description"
     end
+
 
 end
